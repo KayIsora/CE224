@@ -96,9 +96,6 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_USART1_UART_Init(void);
-int CheckTem();
-int CheckHum();
-int CheckLight();
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -394,13 +391,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
 	  DHT22();
-	  SHT40_ReadTemperatureHumidity(&temperature, &humidity);
-	  BH1750_ReadLightIntensity(&light_intensity);
-	  SendData(&huart1);
-	  i++;
-	  HAL_Delay(500);
+	  	  SHT40_ReadTemperatureHumidity(&temperature, &humidity);
+	  	  BH1750_ReadLightIntensity(&light_intensity);
+	  	  SendData(&huart1);
+	  	  i++;
+	  	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -598,8 +594,8 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : PA0 */
   GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB5 */
@@ -608,10 +604,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
