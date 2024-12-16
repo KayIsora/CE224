@@ -388,17 +388,18 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   HAL_UART_Transmit(&huart1, (uint8_t *)Hello, strlen(Hello), HAL_MAX_DELAY);
-  while (1)
+
+  do
   {
-    /* USER CODE END WHILE */
-	  DHT22();
+    /* USER CODE END WHILE meo*/
+	  	  DHT22();
 	  	  SHT40_ReadTemperatureHumidity(&temperature, &humidity);
 	  	  BH1750_ReadLightIntensity(&light_intensity);
 	  	  SendData(&huart1);
 	  	  i++;
 	  	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
-  }
+  }while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_A));
   /* USER CODE END 3 */
 }
 
