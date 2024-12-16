@@ -102,28 +102,28 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	//Ky thuat timeout
-
-
-		HAL_Delay(50);
-		uint32_t tpre = HAL_GetTick();
-		while(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0))
-		{
-			if((HAL_GetTick() - tpre )> 3000)
-			{
-				break;
-			}
-		}
-		HAL_Delay(50);
-		HAL_UART_Transmit(&huart1, (uint8_t *)stop, strlen(stop), HAL_MAX_DELAY);
-		while(GPIO_PIN_RESET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0));
-		HAL_Delay(50);
-
-		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
-
-}
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//	//Ky thuat timeout
+//
+//
+//		HAL_Delay(50);
+//		uint32_t tpre = HAL_GetTick();
+//		while(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0))
+//		{
+//			if((HAL_GetTick() - tpre )> 3000)
+//			{
+//				break;
+//			}
+//		}
+//		HAL_Delay(50);
+//		HAL_UART_Transmit(&huart1, (uint8_t *)stop, strlen(stop), HAL_MAX_DELAY);
+//		while(GPIO_PIN_RESET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0));
+//		HAL_Delay(50);
+//
+//		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
+//
+//}
 void Set_Pin_Output(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
